@@ -4,15 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SuperheroProj.Data;
+using SuperheroProj.Models;
 
 namespace SuperheroProj.Controllers
 {
     public class SuperheroesController : Controller
     {
+        ApplicationDbContext _context;
+
+
+        public SuperheroesController(ApplicationDbContext context)
+        {
+            _context = context;
+            
+        }
+
+
+
         // GET: Superheros
         public ActionResult Index()
         {
-            return View();
+            var superheroes = _context.Superheroes.ToList();
+            return View(superheroes);
         }
 
         // GET: Superheros/Details/5
@@ -24,13 +38,14 @@ namespace SuperheroProj.Controllers
         // GET: Superheros/Create
         public ActionResult Create()
         {
-            return View();
+            Superhero superhero = new Superhero();
+            return View(superhero);
         }
 
         // POST: Superheros/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Superhero superhero)
         {
             try
             {
