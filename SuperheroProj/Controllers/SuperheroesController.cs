@@ -83,6 +83,7 @@ namespace SuperheroProj.Controllers
             {
                 // TODO: Add update logic here
                 _context.Superheroes.Update(superhero);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
