@@ -61,15 +61,15 @@ namespace SuperheroProj.Controllers
             }
             catch
             {
-                return View();
+                return View(superhero);
             }
         }
 
         // GET: Superheros/Edit/5
         public ActionResult Edit(int id)
         {
-            _context.Superheroes.
-            return View();
+            var superheroInDB = _context.Superheroes.Where(s => s.Id == id).FirstOrDefault();
+            return View(superheroInDB);
         }
 
 
@@ -77,17 +77,17 @@ namespace SuperheroProj.Controllers
         // POST: Superheros/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Superhero superhero)
         {
             try
             {
                 // TODO: Add update logic here
-
+                _context.Superheroes.Update(superhero);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(superhero);
             }
         }
 
