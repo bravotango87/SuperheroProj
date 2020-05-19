@@ -32,7 +32,8 @@ namespace SuperheroProj.Controllers
         // GET: Superheros/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var superheroInDB = _context.Superheroes.Where(s => s.Id == id).FirstOrDefault();
+            return View(superheroInDB);
         }
 
         // GET: Superheros/Create
@@ -67,6 +68,7 @@ namespace SuperheroProj.Controllers
         // GET: Superheros/Edit/5
         public ActionResult Edit(int id)
         {
+            _context.Superheroes.
             return View();
         }
 
