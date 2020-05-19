@@ -51,7 +51,12 @@ namespace SuperheroProj.Controllers
             {
                 // TODO: Add insert logic here
 
+                _context.Superheroes.Add(superhero);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
+
+
+
             }
             catch
             {
