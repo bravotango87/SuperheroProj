@@ -95,23 +95,27 @@ namespace SuperheroProj.Controllers
         // GET: Superheros/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var superheroInDB = _context.Superheroes.Where(s => s.Id == id).FirstOrDefault();
+            return View(superheroInDB);
         }
 
         // POST: Superheros/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Superhero superhero)
         {
             try
             {
                 // TODO: Add delete logic here
 
+                _context.Superheroes.Remove(superhero);
+                _context.SaveChanges();
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(superhero);
             }
         }
     }
